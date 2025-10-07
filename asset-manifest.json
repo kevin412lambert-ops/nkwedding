@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/nkwedding/static/css/main.9d7c50fd.css",
+    "main.js": "/nkwedding/static/js/main.86528bb9.js",
+    "index.html": "/nkwedding/index.html",
+    "main.9d7c50fd.css.map": "/nkwedding/static/css/main.9d7c50fd.css.map",
+    "main.86528bb9.js.map": "/nkwedding/static/js/main.86528bb9.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9d7c50fd.css",
+    "static/js/main.86528bb9.js"
+  ]
+}
