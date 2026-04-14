@@ -9,6 +9,6 @@ if /i "%confirm%" NEQ "yes" (
 echo Pushing to PRODUCTION...
 git add .
 git commit -m "prod update: %date% %time%"
-git push prod HEAD:main
+git push prod HEAD:main --force
 echo Done! Production site will update shortly.
 pause
