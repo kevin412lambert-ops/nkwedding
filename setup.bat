@@ -5,6 +5,7 @@ git config --global user.name "Kevin Lambert"
 git config --global user.email "Kevin412lambert@gmail.com"
 git config --global core.autocrlf true
 git init
+git checkout -b main 2>nul || git branch -M main
 git remote remove staging 2>nul
 git remote remove prod 2>nul
 git remote add staging https://github.com/kevin412lambert-ops/nkweddingstage.git
