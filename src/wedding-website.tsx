@@ -626,31 +626,40 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
             <div className="relative">
               <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-teal-400 to-purple-400 hidden md:block"></div>
               
-              {timeline.map((event, index) => (
-                <div key={index} className={`mb-12 ${index % 2 === 0 ? 'md:pl-[220px] md:text-right' : 'md:pr-[220px] md:ml-auto md:text-left'} md:w-1/2 relative`}>
-                  <div className="bg-white rounded-lg shadow-xl p-6 border-2 border-teal-300 hover:border-purple-400 transition-all" style={{position: 'relative', zIndex: 1}}>
+              {timeline.map((event, index) => {
+                const isEven = index % 2 === 0;
+                const textCard = (
+                  <div className={`w-full md:w-1/2 ${isEven ? 'md:pr-8 md:text-right' : 'md:pl-8 md:text-left'}`}>
+                    <div className="bg-white rounded-lg shadow-xl p-6 border-2 border-teal-300 hover:border-purple-400 transition-all">
+                      <div className="text-teal-600 font-semibold mb-2">{event.date}</div>
+                      <h3 className="text-2xl font-serif text-purple-800 mb-3">{event.title}</h3>
+                      <p className="text-gray-700 whitespace-pre-line">{event.description}</p>
+                      {event.quote && (
+                        <p className="text-gray-600 italic mt-3 text-sm">"{event.quote}"</p>
+                      )}
+                    </div>
+                  </div>
+                );
+                const photoCol = (
+                  <div className={`hidden md:flex md:w-1/2 items-center justify-center ${isEven ? 'md:pl-8' : 'md:pr-8'}`}>
                     {event.image ? (
-                      <div className="absolute hidden md:block rounded-full border-4 border-white shadow-lg overflow-hidden"
-                           style={{
-                             width: '400px', height: '400px', top: '50%', transform: 'translateY(-50%)',
-                             ...(index % 2 === 0 ? {left: '10px'} : {right: '10px'})
-                           }}>
+                      <div className="rounded-full border-4 border-white shadow-lg overflow-hidden flex-shrink-0"
+                           style={{width: '400px', height: '400px'}}>
                         <img src={`${process.env.PUBLIC_URL}/${event.image}`} alt={event.title}
                              style={{width: '100%', height: '100%', objectFit: 'cover'}} />
                       </div>
                     ) : (
-                      <div className="absolute hidden md:block top-8 w-4 h-4 bg-purple-500 rounded-full border-4 border-white shadow-lg"
-                           style={index % 2 === 0 ? {right: '-2.6rem'} : {left: '-2.6rem'}}></div>
-                    )}
-                    <div className="text-teal-600 font-semibold mb-2">{event.date}</div>
-                    <h3 className="text-2xl font-serif text-purple-800 mb-3">{event.title}</h3>
-                    <p className="text-gray-700 whitespace-pre-line">{event.description}</p>
-                    {event.quote && (
-                      <p className="text-gray-600 italic mt-3 text-sm">"{event.quote}"</p>
+                      <div className="w-4 h-4 bg-purple-500 rounded-full border-4 border-white shadow-lg flex-shrink-0" />
                     )}
                   </div>
-                </div>
-              ))}
+                );
+                return (
+                  <div key={index} className="mb-12 md:flex items-center">
+                    {isEven ? textCard : photoCol}
+                    {isEven ? photoCol : textCard}
+                  </div>
+                );
+              })}
             </div>
           </div></div>
         )}
