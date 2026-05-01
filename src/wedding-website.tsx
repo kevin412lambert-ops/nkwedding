@@ -588,7 +588,7 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
                       <Calendar className="text-teal-600" />
                       <span>October 23, 2027</span>
                     </div>
-                    <span className="hidden md:inline text-gray-400">â€¢</span>
+                    <span className="hidden md:inline text-gray-400">•</span>
                     <div className="flex items-center gap-2">
                       <MapPin className="text-purple-600" />
                       <span>The Gardenia, Valley View TX</span>
@@ -1386,7 +1386,7 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
             <Heart className="w-6 h-6 text-purple-500" />
             <span className="text-2xl">ðŸ¦†</span>
           </div>
-          <p className="font-medium">Nichole & Kevin â€¢ October 23, 2027</p>
+          <p className="font-medium">Nichole & Kevin • October 23, 2027</p>
           <p className="text-sm mt-2">Questions? Contact us at 817-500-3304</p>
         </div>
       </footer>
