@@ -632,8 +632,8 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
                     {event.image ? (
                       <div className="absolute hidden md:block rounded-full border-4 border-white shadow-lg overflow-hidden"
                            style={{
-                             width: '3rem', height: '3rem', top: '1rem',
-                             ...(index % 2 === 0 ? {right: '-3.6rem'} : {left: '-3.6rem'})
+                             width: '5rem', height: '5rem', top: '0rem',
+                             ...(index % 2 === 0 ? {right: '-4.6rem'} : {left: '-4.6rem'})
                            }}>
                         <img src={`${process.env.PUBLIC_URL}/${event.image}`} alt={event.title}
                              style={{width: '100%', height: '100%', objectFit: 'cover'}} />
