@@ -627,8 +627,8 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
               <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-teal-400 to-purple-400 hidden md:block"></div>
               
               {timeline.map((event, index) => (
-                <div key={index} className={`mb-12 ${index % 2 === 0 ? 'md:pl-[420px] md:text-right' : 'md:pr-[420px] md:ml-auto md:text-left'} md:w-1/2 relative`}>
-                  <div className="bg-white rounded-lg shadow-xl p-6 border-2 border-teal-300 hover:border-purple-400 transition-all">
+                <div key={index} className={`mb-12 ${index % 2 === 0 ? 'md:pl-[220px] md:text-right' : 'md:pr-[220px] md:ml-auto md:text-left'} md:w-1/2 relative`}>
+                  <div className="bg-white rounded-lg shadow-xl p-6 border-2 border-teal-300 hover:border-purple-400 transition-all" style={{position: 'relative', zIndex: 1}}>
                     {event.image ? (
                       <div className="absolute hidden md:block rounded-full border-4 border-white shadow-lg overflow-hidden"
                            style={{
