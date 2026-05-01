@@ -643,7 +643,7 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
                 const photoCol = (
                   <div className={`hidden md:flex md:w-1/2 items-center justify-center ${isEven ? 'md:pl-8' : 'md:pr-8'}`}>
                     {event.image ? (
-                      <div className="rounded-full border-4 border-white shadow-lg overflow-hidden flex-shrink-0"
+                      <div className="rounded-lg border-4 border-white shadow-lg overflow-hidden flex-shrink-0"
                            style={{width: '400px', height: '400px'}}>
                         <img src={`${process.env.PUBLIC_URL}/${event.image}`} alt={event.title}
                              style={{width: '100%', height: '100%', objectFit: 'cover'}} />
