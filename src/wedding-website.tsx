@@ -436,8 +436,8 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
 
   const timeline: { date: string; title: string; description: string; image?: string; quote?: string }[] = [
     { date: 'December 30, 2023', title: 'Our Love Story Began', image: 'Our Love Story Began.jpg', description: 'When a couple of strangers matched on Tinder.\n1.6 BILLION swipes per day\n26 MILLION matches per day', quote: 'First message from him: "Where on Earth did you come from?! You are drop dead gorgeous! What part of the indoors do you like most?"' },
-    { date: 'January 8, 2024', title: 'The Ball Started Rolling', image: 'The Ball Started Rolling.jpg', description: 'He asked her: "Would you be interested to go on a date?"' },
-    { date: 'January 10, 2024', title: 'He Got The Digits', image: 'He Got The Digits.jpg', description: 'Phone numbers exchanged!' },
+    { date: 'January 8, 2024', title: 'The Ball Started Rolling', description: 'He asked her: "Would you be interested to go on a date?"' },
+    { date: 'January 10, 2024', title: 'He Got The Digits', description: 'Phone numbers exchanged!' },
     { date: 'January 12, 2024', title: 'First Date', image: 'First Date.jpg', description: 'We went on our first date at The Museum of Illusions' },
     { date: 'March 15, 2024', title: 'Official Couple', description: 'He asked her to be his Girlfriend' },
     { date: 'May 11, 2024', title: 'Moving In Together', description: 'He moved in with her' },
@@ -643,7 +643,7 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
                 const photoCol = (
                   <div className={`hidden md:flex md:w-1/2 items-center justify-center ${isEven ? 'md:pl-8' : 'md:pr-8'}`}>
                     {event.image ? (
-                      <div className="rounded-lg border-4 border-white shadow-lg overflow-hidden flex-shrink-0"
+                      <div className="rounded-2xl border-4 border-white shadow-lg overflow-hidden flex-shrink-0"
                            style={{width: '400px'}}>
                         <img src={`${process.env.PUBLIC_URL}/${event.image}`} alt={event.title}
                              style={{width: '100%', height: 'auto', display: 'block'}} />
