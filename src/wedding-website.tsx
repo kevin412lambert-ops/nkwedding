@@ -1002,8 +1002,8 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
               <div className="bg-gradient-to-r from-teal-50 to-purple-50 rounded-lg shadow-xl p-6 border-2 border-purple-300 mt-6">
                 <h3 className="text-xl font-semibold text-purple-700 mb-3">Why skulls and ducks?</h3>
                 <p className="text-gray-700 mb-2">Great question! Our wedding theme represents both of us:</p>
-                <p className="text-gray-700"><strong>ðŸ’€ She loves skulls and skeletons</strong> - Nichole has always been drawn to the beauty in the macabre and Day of the Dead aesthetics.</p>
-                <p className="text-gray-700 mt-2"><strong>ðŸ¦† He loves ducks</strong> - Kevin has a fondness for these quirky waterfowl and their goofy charm.</p>
+                <p className="text-gray-700"><strong>💀 She loves skulls and skeletons</strong> - Nichole has always been drawn to the beauty in the macabre and Day of the Dead aesthetics.</p>
+                <p className="text-gray-700 mt-2"><strong>🦆 He loves ducks</strong> - Kevin has a fondness for these quirky waterfowl and their goofy charm.</p>
                 <p className="text-gray-600 italic mt-3">Together, we're a perfect match of spooky and silly!</p>
               </div>
 
@@ -1127,7 +1127,7 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
                       </div>
 
                       <div>
-                        <label className="block text-gray-700 font-medium mb-2">Song Request ðŸŽµ</label>
+                        <label className="block text-gray-700 font-medium mb-2">Song Request 🎵</label>
                         <input type="text" value={rsvpForm.songRequest}
                           onChange={e => setRsvpForm({...rsvpForm, songRequest: e.target.value})}
                           placeholder="What song will get you on the dance floor?"
@@ -1382,9 +1382,9 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
       <footer className="bg-white border-t-2 border-teal-400 mt-20 py-8">
         <div className="max-w-6xl mx-auto px-4 text-center text-gray-600">
           <div className="flex items-center justify-center gap-2 mb-2">
-            <span className="text-2xl">ðŸ’€</span>
+            <span className="text-2xl">💀</span>
             <Heart className="w-6 h-6 text-purple-500" />
-            <span className="text-2xl">ðŸ¦†</span>
+            <span className="text-2xl">🦆</span>
           </div>
           <p className="font-medium">Nichole & Kevin • October 23, 2027</p>
           <p className="text-sm mt-2">Questions? Contact us at 817-500-3304</p>
