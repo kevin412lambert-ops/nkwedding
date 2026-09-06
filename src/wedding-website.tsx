@@ -1,5 +1,5 @@
-﻿import React, { useState } from 'react';
-import { Heart, Calendar, MapPin, Gift, Menu, X, Check, Plane, Mail, Users, HelpCircle, DollarSign, ExternalLink } from 'lucide-react';
+import React, { useState } from 'react';
+import { Heart, Calendar, MapPin, Gift, Menu, X, Check, Mail, Users, HelpCircle, DollarSign, ExternalLink } from 'lucide-react';
 
 const envelopeStyles = `
   @keyframes envelopeFadeIn {
@@ -59,7 +59,7 @@ function EnvelopeIntro({ alreadyUnlocked, setUnlocked, onComplete, autoAdvance =
     if (phase !== 'idle') return;
     setPhase('opening');
     if (autoAdvance) {
-      // URL-token guests: flap opens, then envelope expands forward â€” no password screen
+      // URL-token guests: flap opens, then envelope expands forward — no password screen
       setPasswordFlow(true);
       setTimeout(() => setPhase('expanding'), 900);
       setTimeout(() => { setPhase('done'); onComplete(); }, 1800);
@@ -108,7 +108,7 @@ function EnvelopeIntro({ alreadyUnlocked, setUnlocked, onComplete, autoAdvance =
           </div>
         </div>
 
-        {/* Password card â€” rises out of, then descends back into, envelope */}
+        {/* Password card — rises out of, then descends back into, envelope */}
         {(phase === 'risen' || phase === 'descending' || (phase === 'expanding' && !passwordFlow)) && (
           <div className={
             phase === 'descending' ? 'letter-descend' :
@@ -143,7 +143,7 @@ function EnvelopeIntro({ alreadyUnlocked, setUnlocked, onComplete, autoAdvance =
                                  borderRadius:8, fontSize:15, outline:'none', boxSizing:'border-box',
                                  background: passwordError ? '#fef2f2' : 'white'}} />
                 </div>
-                {passwordError && <p style={{color:'#ef4444', fontSize:13, margin:0}}>Incorrect hashtag â€” try again!</p>}
+                {passwordError && <p style={{color:'#ef4444', fontSize:13, margin:0}}>Incorrect hashtag — try again!</p>}
                 <button type="submit"
                         style={{background:'linear-gradient(135deg,#0d9488,#14b8a6)', color:'white',
                                 border:'none', borderRadius:8, padding:'12px', fontSize:15,
@@ -198,7 +198,7 @@ function EnvelopeIntro({ alreadyUnlocked, setUnlocked, onComplete, autoAdvance =
         </div>
       </div>
 
-      {/* Click to open prompt â€” hidden for URL-token guests */}
+      {/* Click to open prompt — hidden for URL-token guests */}
       {phase === 'idle' && !autoAdvance && (
         <div className="click-pulse" onClick={handleEnvelopeClick}
              style={{position:'absolute', bottom:'12%', left:'50%',
@@ -308,7 +308,7 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
     } catch (err: any) {
       clearTimeout(timeout);
       if (err?.name === 'AbortError') {
-        setLookupError('The lookup is taking too long. Please try again â€” if the problem persists, contact us at 817-500-3304.');
+        setLookupError('The lookup is taking too long. Please try again — if the problem persists, contact us at 817-500-3304.');
       } else {
         setLookupError('We were unable to look up your invitation right now. Please check your connection and try again, or contact us at 817-500-3304.');
       }
@@ -332,7 +332,7 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
       }).catch(() => {});
 
       const isAttending = rsvpForm.attending === 'yes';
-      let discordMsg = `**New RSVP**\n**Name:** ${rsvpForm.name}\n**Attending:** ${isAttending ? 'âœ… Yes' : 'âŒ No'}`;
+      let discordMsg = `**New RSVP**\n**Name:** ${rsvpForm.name}\n**Attending:** ${isAttending ? '✅ Yes' : '❌ No'}`;
       if (isAttending) {
         discordMsg += `\n**Party Size:** ${rsvpForm.partySize}`;
         if (guestNamesJoined) discordMsg += `\n**Guests:** ${guestNamesJoined}`;
@@ -395,11 +395,11 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
   };
 
   // Sections hidden from nav by default
-  // Enable individually via URL params e.g. ?rsvp=true&faq=true&honeymoon_fund=true
+  // Enable individually via URL params e.g. ?rsvp=true&party=true
   const isStaging = typeof window !== 'undefined' && window.location.hostname === 'kevin412lambert-ops.github.io';
-  const alwaysVisibleOnStaging = new Set(['rsvp', 'registry']);
+  const alwaysVisibleOnStaging = new Set(['registry']);
   const hiddenByDefault = new Set(
-    ['party', 'details', 'faq', 'rsvp', 'registry', 'honeymoon', 'address']
+    ['party', 'rsvp', 'registry', 'address']
       .filter(section => !(isStaging && alwaysVisibleOnStaging.has(section)))
   );
   const urlParamToSection: Record<string, string> = {
@@ -408,7 +408,6 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
     faq: 'faq',
     rsvp: 'rsvp',
     registry: 'registry',
-    honeymoon_fund: 'honeymoon',
     address: 'address'
   };
   const urlParams = new URLSearchParams(window.location.search);
@@ -427,7 +426,6 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
     faq: { icon: HelpCircle, label: 'FAQ' },
     rsvp: { icon: Check, label: 'RSVP' },
     registry: { icon: Gift, label: 'Registry' },
-    honeymoon: { icon: Plane, label: 'Honeymoon Fund' },
     address: { icon: Mail, label: 'Address Collection' }
   };
 
@@ -486,7 +484,7 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
                 />
               </div>
               {passwordError && (
-                <p className="text-red-500 text-sm">Incorrect hashtag â€” try again!</p>
+                <p className="text-red-500 text-sm">Incorrect hashtag — try again!</p>
               )}
               <button
                 type="submit"
@@ -571,7 +569,7 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
                    backgroundPosition: 'top center',
                    minHeight: '805px'
                  }}>
-              {/* "Nichole & Kevin" â€” top of photo, centered */}
+              {/* "Nichole & Kevin" — top of photo, centered */}
               <div className="pt-10 text-center">
                 <h1 className="text-6xl md:text-8xl font-serif text-purple-900"
                     style={{textShadow: '0 2px 12px rgba(255,255,255,0.9)'}}>
@@ -583,7 +581,7 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
               <div className="absolute bottom-0 left-0 right-0"
                    style={{height: '27%', background: 'linear-gradient(to top, rgba(255,255,255,0.72) 0%, transparent 100%)', pointerEvents: 'none'}} />
 
-              {/* "are getting married" + date/location + buttons â€” bottom of photo */}
+              {/* "are getting married" + date/location + buttons — bottom of photo */}
               <div className="absolute bottom-0 left-0 right-0 px-10 text-center" style={{paddingBottom: '47px'}}>
                 <div className="inline-block rounded-2xl px-8 py-4 mb-4" style={{background: 'rgba(200,200,200,0.45)', backdropFilter: 'blur(4px)'}}>
                   <div className="text-2xl md:text-3xl text-gray-800 mb-3 font-bold">
@@ -620,6 +618,16 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
                     </button>
                   ) : null}
                 </div>
+                {!hiddenByDefault.has('registry') || visibleViaUrl.has('registry') ? (
+                  <div className="flex justify-center mt-4">
+                    <button
+                      onClick={() => setActiveSection('registry')}
+                      className="bg-gradient-to-r from-teal-600 to-purple-600 text-white px-8 py-3 rounded-full hover:from-teal-700 hover:to-purple-700 transition-all text-lg shadow-lg"
+                    >
+                      View Registry
+                    </button>
+                  </div>
+                ) : null}
               </div>
             </div>
           </div>
@@ -798,7 +806,7 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
                   Something you'd wear to a Christmas Service at church
                 </p>
                 <p className="text-red-600 text-sm mt-2 font-medium">
-                  âš ï¸ Please avoid wearing white
+                  ⚠️ Please avoid wearing white
                 </p>
               </div>
 
@@ -884,66 +892,53 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
                 We recommend these nearby hotels for your convenience:
               </p>
               <div className="space-y-4">
-                <div className="p-4 bg-teal-50 rounded-lg border border-teal-200">
-                  <p className="font-semibold text-gray-800">OYO Hotel Valley View TX, I-35</p>
-                  <p className="text-gray-600 text-sm mt-1">Valley View, TX (5 minutes from venue)</p>
-                  <p className="text-gray-600 text-sm mt-1">Free WiFi & Parking</p>
-                  <a 
-                    href="https://www.booking.com/hotel/us/texas-inn-valley-view.html" 
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-teal-700 text-sm mt-2 inline-block hover:underline"
-                  >
-                    Book Now â†’
-                  </a>
-                </div>
                 <div className="p-4 bg-purple-50 rounded-lg border border-purple-200">
-                  <p className="font-semibold text-gray-800">Embassy Suites by Hilton Denton</p>
+                  <p className="font-semibold text-gray-800">Embassy Suites by Hilton Denton Convention Center</p>
                   <p className="text-gray-600 text-sm mt-1">Denton, TX (20 minutes from venue)</p>
-                  <a 
-                    href="https://www.hilton.com/en/hotels/dfweees-embassy-suites-denton-convention-center/" 
+                  <a
+                    href="https://www.hilton.com/en/hotels/dfwntes-embassy-suites-denton-convention-center/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-purple-700 text-sm mt-2 inline-block hover:underline"
                   >
-                    Book Now â†’
+                    Book Now →
                   </a>
                 </div>
                 <div className="p-4 bg-teal-50 rounded-lg border border-teal-200">
                   <p className="font-semibold text-gray-800">Fairfield Inn & Suites by Marriott Denton</p>
                   <p className="text-gray-600 text-sm mt-1">Denton, TX (20 minutes from venue)</p>
-                  <a 
-                    href="https://www.marriott.com/hotels/travel/dalfd-fairfield-inn-and-suites-denton/" 
+                  <a
+                    href="https://www.marriott.com/en-us/hotels/dfwdn-fairfield-inn-and-suites-denton/overview/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-teal-700 text-sm mt-2 inline-block hover:underline"
                   >
-                    Book Now â†’
+                    Book Now →
                   </a>
                 </div>
                 <div className="p-4 bg-purple-50 rounded-lg border border-purple-200">
-                  <p className="font-semibold text-gray-800">Holiday Inn Express & Suites Sanger</p>
+                  <p className="font-semibold text-gray-800">Holiday Inn Express & Suites Denton - Sanger</p>
                   <p className="text-gray-600 text-sm mt-1">Sanger, TX (15 minutes from venue)</p>
-                  <a 
-                    href="https://www.ihg.com/holidayinnexpress/hotels/us/en/sanger/sngtx/hoteldetail" 
+                  <a
+                    href="https://www.ihg.com/holidayinnexpress/hotels/us/en/sanger/dfwsg/hoteldetail"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-purple-700 text-sm mt-2 inline-block hover:underline"
                   >
-                    Book Now â†’
+                    Book Now →
                   </a>
                 </div>
                 <div className="p-4 bg-teal-50 rounded-lg border border-teal-200">
                   <p className="font-semibold text-gray-800">WinStar World Casino & Resort</p>
                   <p className="text-gray-600 text-sm mt-1">Thackerville, OK (30 minutes from venue)</p>
                   <p className="text-gray-600 text-sm mt-1">Full-service resort with casino, golf, and spa</p>
-                  <a 
-                    href="https://www.winstar.com/" 
+                  <a
+                    href="https://www.winstar.com/stay/accomodations/winstar-world-casino-hotel/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-teal-700 text-sm mt-2 inline-block hover:underline"
                   >
-                    Book Now â†’
+                    Book Now →
                   </a>
                 </div>
                 <div className="p-3 bg-gray-50 rounded text-sm text-gray-600">
@@ -973,7 +968,7 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
               <div className="bg-white rounded-lg shadow-xl p-6 border-2 border-teal-300">
                 <h3 className="text-xl font-semibold text-teal-700 mb-3">What should I wear?</h3>
                 <p className="text-gray-700 mb-2">The dress code is <strong>semi-formal</strong> - think of what you'd wear to a Christmas Service at church.</p>
-                <p className="text-red-600 font-medium">âš ï¸ Please avoid wearing white to respect the bride.</p>
+                <p className="text-red-600 font-medium">⚠️ Please avoid wearing white to respect the bride.</p>
                 <p className="text-gray-600 text-sm mt-2">Our wedding colors are Teal, Purple, White, Black, and Silver if you'd like to coordinate!</p>
               </div>
 
@@ -996,10 +991,9 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
                 <h3 className="text-xl font-semibold text-teal-700 mb-3">What travel accommodations are available?</h3>
                 <p className="text-gray-700 mb-3">We recommend these nearby hotels:</p>
                 <ul className="list-disc list-inside space-y-2 text-gray-700">
-                  <li><strong>OYO Hotel Valley View TX</strong> - 5 minutes from venue</li>
-                  <li><strong>Embassy Suites by Hilton Denton</strong> - 20 minutes from venue</li>
+                  <li><strong>Embassy Suites by Hilton Denton Convention Center</strong> - 20 minutes from venue</li>
                   <li><strong>Fairfield Inn & Suites by Marriott Denton</strong> - 20 minutes from venue</li>
-                  <li><strong>Holiday Inn Express & Suites Sanger</strong> - 15 minutes from venue</li>
+                  <li><strong>Holiday Inn Express & Suites Denton - Sanger</strong> - 15 minutes from venue</li>
                   <li><strong>WinStar World Casino & Resort</strong> - 30 minutes from venue (full-service resort)</li>
                 </ul>
                 <p className="text-gray-600 text-sm mt-3">Check our Details page for booking links! We will update with room block information once available.</p>
@@ -1084,7 +1078,7 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
                             ? 'border-teal-500 bg-teal-50 text-teal-700 shadow-md'
                             : 'border-gray-300 hover:border-teal-300 text-gray-700'
                         }`}>
-                        âœ“ Joyfully Accept
+                        Joyfully Accept
                       </button>
                       <button type="button"
                         onClick={() => setRsvpForm({...rsvpForm, attending: 'no'})}
@@ -1093,7 +1087,7 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
                             ? 'border-purple-500 bg-purple-50 text-purple-700 shadow-md'
                             : 'border-gray-300 hover:border-purple-300 text-gray-700'
                         }`}>
-                        âœ— Regretfully Decline
+                        Regretfully Decline
                       </button>
                     </div>
                   </div>
@@ -1123,10 +1117,10 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
 
                       {rsvpForm.additionalGuestNames.length > 0 && (
                         <div>
-                          <label className="block text-gray-700 font-medium mb-2">Additional Guest Names</label>
+                          <label className="block text-gray-700 font-medium mb-2">Additional Guest Names *</label>
                           <div className="grid sm:grid-cols-2 gap-4">
                             {rsvpForm.additionalGuestNames.map((guestName, i) => (
-                              <input key={i} type="text" value={guestName}
+                              <input key={i} type="text" required value={guestName}
                                 onChange={e => {
                                   const updated = [...rsvpForm.additionalGuestNames];
                                   updated[i] = e.target.value;
@@ -1140,7 +1134,7 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
                       )}
 
                       <div>
-                        <label className="block text-gray-700 font-medium mb-2">Song Request 🎵</label>
+                        <label className="block text-gray-700 font-medium mb-2">Song Request 🎵 <span className="text-gray-400 font-normal">(Optional)</span></label>
                         <input type="text" value={rsvpForm.songRequest}
                           onChange={e => setRsvpForm({...rsvpForm, songRequest: e.target.value})}
                           placeholder="What song will get you on the dance floor?"
@@ -1179,7 +1173,7 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
                     <button type="button"
                       onClick={() => { setRsvpStep('lookup'); setLookupError(''); }}
                       className="px-5 py-3 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-all">
-                      â† Back
+                      ← Back
                     </button>
                     <button type="submit"
                       disabled={isSubmitting || !rsvpForm.attending}
@@ -1265,46 +1259,6 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
                     <p className="text-gray-700">
                       Send to <span className="font-semibold text-gray-900">twloha14@hotmail.com</span>
                     </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div></div>
-        )}
-
-        {activeSection === 'honeymoon' && (
-          <div className="max-w-4xl mx-auto px-4 py-16">
-          <div className="bg-white/90 rounded-3xl shadow-2xl p-8">
-            <h2 className="text-5xl font-serif text-purple-900 text-center mb-12">Honeymoon Fund</h2>
-            
-            <div className="bg-white rounded-lg shadow-xl p-8 md:p-12 border-2 border-purple-300">
-              <Plane className="w-16 h-16 text-purple-500 mx-auto mb-6" />
-              
-              <p className="text-gray-700 mb-8 text-lg text-center max-w-2xl mx-auto">
-                We are so blessed to have everything we need for our home. If you would like to 
-                contribute to our honeymoon adventure, we would be incredibly grateful!
-              </p>
-              
-              <div className="max-w-xl mx-auto space-y-6">
-                <div className="p-6 bg-gradient-to-r from-teal-50 to-purple-50 rounded-lg border border-teal-200">
-                  <h3 className="text-xl font-serif text-purple-800 mb-3">Our Dream Destination</h3>
-                  <p className="text-gray-700">
-                    We are planning a romantic honeymoon to create unforgettable memories together.
-                    Your contribution will help us make this dream a reality!
-                  </p>
-                </div>
-                
-                <div className="text-center">
-                  <p className="text-gray-700 mb-4 font-medium">
-                    Contributions can be made via:
-                  </p>
-                  <div className="space-y-3">
-                    <div className="p-4 border-2 border-teal-300 rounded-lg">
-                      <p className="font-semibold text-gray-800">Venmo: @kevin-lambert-31</p>
-                    </div>
-                    <div className="p-4 border-2 border-purple-300 rounded-lg">
-                      <p className="font-semibold text-gray-800">Zelle: Kevin412l@hotmail.com</p>
-                    </div>
                   </div>
                 </div>
               </div>
