@@ -1,5 +1,5 @@
 ﻿import React, { useState } from 'react';
-import { Heart, Calendar, MapPin, Gift, Menu, X, Check, Plane, Mail, Users, HelpCircle } from 'lucide-react';
+import { Heart, Calendar, MapPin, Gift, Menu, X, Check, Plane, Mail, Users, HelpCircle, DollarSign, ExternalLink } from 'lucide-react';
 
 const envelopeStyles = `
   @keyframes envelopeFadeIn {
@@ -303,7 +303,7 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
         setRsvpForm(prev => ({ ...prev, name: data.name }));
         setRsvpStep('form');
       } else {
-        setLookupError("We couldn't find your invitation. Please enter your full name exactly as it appears on your invitation, your email address, or your invitation code. Need help? Call us at 817-500-3304.");
+        setLookupError("We couldn't find your invitation. Please enter your full name exactly as it appears on your invitation. Need help? Call us at 817-500-3304.");
       }
     } catch (err: any) {
       clearTimeout(timeout);
@@ -1030,14 +1030,14 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
                 <div className="text-center mb-8">
                   <Users className="w-12 h-12 text-teal-500 mx-auto mb-4" />
                   <h3 className="text-2xl font-serif text-purple-800 mb-2">Find Your Invitation</h3>
-                  <p className="text-gray-600 text-sm">Enter your full name, email address, or invitation code</p>
+                  <p className="text-gray-600 text-sm">Enter your full name</p>
                 </div>
                 <form onSubmit={handleLookup} className="space-y-4">
                   <div>
-                    <label className="block text-gray-700 font-medium mb-2">Full Name, Email, or Invitation Code</label>
+                    <label className="block text-gray-700 font-medium mb-2">Full Name</label>
                     <input type="text" required value={lookupQuery}
                       onChange={e => { setLookupQuery(e.target.value); setLookupError(''); }}
-                      placeholder="e.g., Chuck Norris or ABC12345"
+                      placeholder="e.g., Chuck Norris"
                       className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500" />
                   </div>
                   {lookupError && (
@@ -1222,32 +1222,43 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
             
             <div className="bg-white rounded-lg shadow-xl p-8 md:p-12 border-2 border-teal-300">
               <Gift className="w-16 h-16 text-teal-500 mx-auto mb-6" />
-              
+
               <p className="text-gray-700 mb-8 text-lg text-center max-w-2xl mx-auto">
-                Your presence at our wedding is the greatest gift of all. However, if you wish to 
-                honor us with a gift, we have registered at the following stores:
+                Your presence at our wedding is the greatest gift of all. However, if you wish to
+                honor us with a gift, we've put together a registry below.
               </p>
-              
-              <div className="grid sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
+
+              <div className="max-w-xl mx-auto">
                 <a
-                  href="https://www.target.com"
+                  href="https://www.myregistry.com/wedding-registry/nichole-sheridan-euless-tx/5407595/giftlist?publicUrlName=nkwedding2027"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="border-2 border-teal-500 text-teal-600 px-8 py-6 rounded-lg hover:bg-teal-50 transition-all text-center shadow-md"
+                  className="group flex items-center justify-center gap-3 bg-gradient-to-r from-teal-500 to-purple-500 text-white px-8 py-6 rounded-xl hover:from-teal-600 hover:to-purple-600 transition-all text-center shadow-lg hover:shadow-xl"
                 >
-                  <Gift className="w-8 h-8 mx-auto mb-2" />
-                  <div className="text-lg font-semibold">Target Registry</div>
+                  <Gift className="w-8 h-8 flex-shrink-0" />
+                  <div className="text-xl font-semibold">View Our Registry</div>
+                  <ExternalLink className="w-5 h-5 flex-shrink-0 opacity-75 group-hover:translate-x-0.5 transition-transform" />
                 </a>
-                
-                <a
-                  href="https://www.crateandbarrel.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="border-2 border-purple-500 text-purple-600 px-8 py-6 rounded-lg hover:bg-purple-50 transition-all text-center shadow-md"
-                >
-                  <Gift className="w-8 h-8 mx-auto mb-2" />
-                  <div className="text-lg font-semibold">Crate & Barrel</div>
-                </a>
+              </div>
+
+              <div className="max-w-xl mx-auto mt-10">
+                <div className="relative flex items-center mb-8">
+                  <div className="flex-grow border-t border-teal-200"></div>
+                  <span className="mx-4 text-sm uppercase tracking-wide text-gray-500 font-medium">Prefer to send cash?</span>
+                  <div className="flex-grow border-t border-teal-200"></div>
+                </div>
+
+                <div className="p-6 bg-gradient-to-r from-teal-50 to-purple-50 rounded-lg border border-teal-200 flex items-center gap-5">
+                  <div className="w-14 h-14 rounded-full bg-white shadow-md flex items-center justify-center flex-shrink-0 border-2 border-purple-300">
+                    <DollarSign className="w-7 h-7 text-purple-600" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-serif text-purple-900 mb-1">Zelle</h3>
+                    <p className="text-gray-700">
+                      Send to <span className="font-semibold text-gray-900">twloha14@hotmail.com</span>
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div></div>
