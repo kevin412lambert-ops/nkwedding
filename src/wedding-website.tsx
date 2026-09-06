@@ -254,9 +254,9 @@ export default function WeddingWebsite() {
   const [rsvpForm, setRsvpForm] = useState<{
     name: string; email: string; phone: string;
     attending: '' | 'yes' | 'no'; partySize: string;
-    plusOneName: string; dietaryRestrictions: string;
+    additionalGuestNames: string[];
     songRequest: string; message: string;
-  }>({ name: '', email: '', phone: '', attending: '', partySize: '1', plusOneName: '', dietaryRestrictions: '', songRequest: '', message: '' });
+  }>({ name: '', email: '', phone: '', attending: '', partySize: '1', additionalGuestNames: [], songRequest: '', message: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Google Sheets and Discord Configuration
@@ -323,18 +323,19 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
     setIsSubmitting(true);
 
     try {
+      const guestNamesJoined = rsvpForm.additionalGuestNames.map(n => n.trim()).filter(Boolean).join(', ');
+
       fetch(GOOGLE_SHEETS_URL, {
         method: 'POST',
         mode: 'no-cors',
-        body: JSON.stringify({ ...rsvpForm, sheet: 'RSVPs' })
+        body: JSON.stringify({ ...rsvpForm, plusOneName: guestNamesJoined, sheet: 'RSVPs' })
       }).catch(() => {});
 
       const isAttending = rsvpForm.attending === 'yes';
       let discordMsg = `**New RSVP**\n**Name:** ${rsvpForm.name}\n**Attending:** ${isAttending ? 'âœ… Yes' : 'âŒ No'}`;
       if (isAttending) {
         discordMsg += `\n**Party Size:** ${rsvpForm.partySize}`;
-        if (rsvpForm.plusOneName) discordMsg += `\n**Guests:** ${rsvpForm.plusOneName}`;
-        if (rsvpForm.dietaryRestrictions) discordMsg += `\n**Dietary:** ${rsvpForm.dietaryRestrictions}`;
+        if (guestNamesJoined) discordMsg += `\n**Guests:** ${guestNamesJoined}`;
         if (rsvpForm.songRequest) discordMsg += `\n**Song:** ${rsvpForm.songRequest}`;
       }
       if (rsvpForm.email) discordMsg += `\n**Email:** ${rsvpForm.email}`;
@@ -1100,36 +1101,43 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
                   {rsvpForm.attending === 'yes' && (
                     <>
                       {guestInfo.maxPartySize > 1 && (
-                        <div className={`grid gap-4 ${parseInt(rsvpForm.partySize) > 1 ? 'grid-cols-2' : 'grid-cols-1'}`}>
-                          <div>
-                            <label className="block text-gray-700 font-medium mb-2">Number Attending</label>
-                            <select value={rsvpForm.partySize}
-                              onChange={e => setRsvpForm({...rsvpForm, partySize: e.target.value})}
-                              className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500">
-                              {Array.from({ length: guestInfo.maxPartySize }, (_, i) => i + 1).map(n => (
-                                <option key={n} value={n}>{n} {n === 1 ? 'person' : 'people'}</option>
-                              ))}
-                            </select>
-                          </div>
-                          {parseInt(rsvpForm.partySize) > 1 && (
-                            <div>
-                              <label className="block text-gray-700 font-medium mb-2">Additional Guest Names</label>
-                              <input type="text" value={rsvpForm.plusOneName}
-                                onChange={e => setRsvpForm({...rsvpForm, plusOneName: e.target.value})}
-                                placeholder="Guest names"
-                                className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500" />
-                            </div>
-                          )}
+                        <div>
+                          <label className="block text-gray-700 font-medium mb-2">Number Attending</label>
+                          <select value={rsvpForm.partySize}
+                            onChange={e => {
+                              const newPartySize = e.target.value;
+                              const additionalCount = Math.max(0, parseInt(newPartySize) - 1);
+                              setRsvpForm(prev => ({
+                                ...prev,
+                                partySize: newPartySize,
+                                additionalGuestNames: Array.from({ length: additionalCount }, (_, i) => prev.additionalGuestNames[i] || '')
+                              }));
+                            }}
+                            className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500">
+                            {Array.from({ length: guestInfo.maxPartySize }, (_, i) => i + 1).map(n => (
+                              <option key={n} value={n}>{n} {n === 1 ? 'person' : 'people'}</option>
+                            ))}
+                          </select>
                         </div>
                       )}
 
-                      <div>
-                        <label className="block text-gray-700 font-medium mb-2">Dietary Restrictions or Allergies</label>
-                        <input type="text" value={rsvpForm.dietaryRestrictions}
-                          onChange={e => setRsvpForm({...rsvpForm, dietaryRestrictions: e.target.value})}
-                          placeholder="e.g., Vegetarian, Gluten-free, Nut allergy"
-                          className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500" />
-                      </div>
+                      {rsvpForm.additionalGuestNames.length > 0 && (
+                        <div>
+                          <label className="block text-gray-700 font-medium mb-2">Additional Guest Names</label>
+                          <div className="grid sm:grid-cols-2 gap-4">
+                            {rsvpForm.additionalGuestNames.map((guestName, i) => (
+                              <input key={i} type="text" value={guestName}
+                                onChange={e => {
+                                  const updated = [...rsvpForm.additionalGuestNames];
+                                  updated[i] = e.target.value;
+                                  setRsvpForm({...rsvpForm, additionalGuestNames: updated});
+                                }}
+                                placeholder={`Guest ${i + 2} name`}
+                                className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500" />
+                            ))}
+                          </div>
+                        </div>
+                      )}
 
                       <div>
                         <label className="block text-gray-700 font-medium mb-2">Song Request 🎵</label>
@@ -1143,14 +1151,14 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
 
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-gray-700 font-medium mb-2">Email</label>
+                      <label className="block text-gray-700 font-medium mb-2">Email <span className="text-gray-400 font-normal">(Optional)</span></label>
                       <input type="email" value={rsvpForm.email}
                         onChange={e => setRsvpForm({...rsvpForm, email: e.target.value})}
                         placeholder="your@email.com"
                         className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-teal-500" />
                     </div>
                     <div>
-                      <label className="block text-gray-700 font-medium mb-2">Phone</label>
+                      <label className="block text-gray-700 font-medium mb-2">Phone <span className="text-gray-400 font-normal">(Optional)</span></label>
                       <input type="tel" value={rsvpForm.phone}
                         onChange={e => setRsvpForm({...rsvpForm, phone: e.target.value})}
                         placeholder="(555) 555-5555"
@@ -1159,7 +1167,7 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
                   </div>
 
                   <div>
-                    <label className="block text-gray-700 font-medium mb-2">Message to the Couple</label>
+                    <label className="block text-gray-700 font-medium mb-2">Message to the Couple <span className="text-gray-400 font-normal">(Optional)</span></label>
                     <textarea value={rsvpForm.message}
                       onChange={e => setRsvpForm({...rsvpForm, message: e.target.value})}
                       placeholder="Share a note, wish, or memory..."
@@ -1204,7 +1212,7 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
                       setLookupQuery('');
                       setLookupError('');
                       setGuestInfo(null);
-                      setRsvpForm({ name: '', email: '', phone: '', attending: '', partySize: '1', plusOneName: '', dietaryRestrictions: '', songRequest: '', message: '' });
+                      setRsvpForm({ name: '', email: '', phone: '', attending: '', partySize: '1', additionalGuestNames: [], songRequest: '', message: '' });
                     }}
                     className="bg-white text-purple-600 border-2 border-purple-600 px-6 py-3 rounded-lg hover:bg-purple-50 transition-all">
                     Submit Another RSVP
