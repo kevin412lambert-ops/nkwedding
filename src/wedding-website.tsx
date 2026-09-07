@@ -396,12 +396,7 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
 
   // Sections hidden from nav by default
   // Enable individually via URL params e.g. ?rsvp=true&party=true
-  const isStaging = typeof window !== 'undefined' && window.location.hostname === 'kevin412lambert-ops.github.io';
-  const alwaysVisibleOnStaging = new Set(['registry']);
-  const hiddenByDefault = new Set(
-    ['party', 'rsvp', 'registry', 'address']
-      .filter(section => !(isStaging && alwaysVisibleOnStaging.has(section)))
-  );
+  const hiddenByDefault = new Set(['party', 'rsvp', 'address']);
   const urlParamToSection: Record<string, string> = {
     party: 'party',
     details: 'details',
