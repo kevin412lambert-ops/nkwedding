@@ -600,7 +600,12 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
                    minHeight: '805px'
                  }}>
               {/* "Nichole & Kevin" — top of photo, centered */}
-              <div className="pt-10 text-center">
+              <div className="pt-6 text-center">
+                <div className="inline-block rounded-2xl px-6 py-3" style={{background: 'rgba(200,200,200,0.45)', backdropFilter: 'blur(4px)'}}>
+                  <Countdown />
+                </div>
+              </div>
+              <div className="pt-4 text-center">
                 <h1 className="text-6xl md:text-8xl font-serif text-purple-900"
                     style={{textShadow: '0 2px 12px rgba(255,255,255,0.9)'}}>
                   Nichole & Kevin
@@ -627,9 +632,6 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
                       <MapPin className="text-purple-600" />
                       <span>The Gardenia, Valley View TX</span>
                     </div>
-                  </div>
-                  <div className="mt-4 pt-3 border-t border-gray-400/50">
-                    <Countdown />
                   </div>
                 </div>
                 <div className="mb-0"></div>
