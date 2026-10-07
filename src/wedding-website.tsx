@@ -44,7 +44,12 @@ const envelopeStyles = `
   .click-pulse     { animation: clickPulse 1.8s ease-in-out infinite; }
 `;
 
-const WEDDING_DATE = new Date(2027, 9, 23, 0, 0, 0); // October 23, 2027 (local time)
+// HIDDEN until the wedding time is finalized: Details "Timeline" card, and FAQ
+// "What time should I arrive?" / "How long will the wedding last?". Details time shows "TBD".
+// Set to true (and restore the 4:00 PM time on the Details card) to bring them back.
+const SHOW_TIME_DETAILS = false;
+
+const WEDDING_DATE =new Date(2027, 9, 23, 0, 0, 0); // October 23, 2027 (local time)
 
 function Countdown() {
   const [now, setNow] = useState(() => Date.now());
@@ -837,7 +842,7 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
                 <Calendar className="w-12 h-12 text-teal-500 mb-4" />
                 <h3 className="text-2xl font-serif text-purple-800 mb-4">Ceremony</h3>
                 <p className="text-gray-700 mb-2"><strong>Date:</strong> October 23, 2027</p>
-                <p className="text-gray-700 mb-2"><strong>Time:</strong> 4:00 PM</p>
+                <p className="text-gray-700 mb-2"><strong>Time:</strong> {SHOW_TIME_DETAILS ? '4:00 PM' : 'TBD'}</p>
                 <p className="text-gray-700 mb-2"><strong>Dress Code:</strong> Semi-Formal</p>
                 <p className="text-gray-600 text-sm mt-4 italic">
                   Something you'd wear to a Christmas Service at church
@@ -875,6 +880,7 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
               </div>
             </div>
 
+            {SHOW_TIME_DETAILS && (
             <div className="bg-white rounded-lg shadow-xl p-8 mt-8 border-2 border-teal-300">
               <h3 className="text-2xl font-serif text-purple-800 mb-6">Timeline</h3>
               <div className="space-y-4">
@@ -922,6 +928,7 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
                 </div>
               </div>
             </div>
+            )}
 
             <div className="bg-white rounded-lg shadow-xl p-8 mt-8 border-2 border-purple-300">
               <h3 className="text-2xl font-serif text-teal-800 mb-4">Accommodations</h3>
@@ -997,10 +1004,12 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
                 <p className="text-gray-700">The Gardenia is located at 775 S Pecan Creek Trail, Valley View, TX 76272. It's a beautiful venue perfect for our special day!</p>
               </div>
 
+              {SHOW_TIME_DETAILS && (
               <div className="bg-white rounded-lg shadow-xl p-6 border-2 border-purple-300">
                 <h3 className="text-xl font-semibold text-purple-700 mb-3">What time should I arrive?</h3>
                 <p className="text-gray-700">Please plan to arrive by 3:30 PM to allow time for parking and seating. The ceremony will begin promptly at 4:00 PM.</p>
               </div>
+              )}
 
               <div className="bg-white rounded-lg shadow-xl p-6 border-2 border-teal-300">
                 <h3 className="text-xl font-semibold text-teal-700 mb-3">What should I wear?</h3>
@@ -1019,10 +1028,12 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
                 <p className="text-gray-700">The Gardenia offers ample on-site parking for all guests. Parking is free and convenient, with easy access to the venue entrance.</p>
               </div>
 
+              {SHOW_TIME_DETAILS && (
               <div className="bg-white rounded-lg shadow-xl p-6 border-2 border-purple-300">
                 <h3 className="text-xl font-semibold text-purple-700 mb-3">How long will the wedding last?</h3>
                 <p className="text-gray-700">The full event will run from 4:00 PM to 10:00 PM. The ceremony begins at 4:00 PM, followed by cocktail hour, reception, dinner, and dancing until our grand send-off at 10:00 PM.</p>
               </div>
+              )}
 
               <div className="bg-white rounded-lg shadow-xl p-6 border-2 border-teal-300">
                 <h3 className="text-xl font-semibold text-teal-700 mb-3">What travel accommodations are available?</h3>
