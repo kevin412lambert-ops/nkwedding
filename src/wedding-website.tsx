@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Heart, Calendar, MapPin, Gift, Menu, X, Check, Mail, Users, HelpCircle, DollarSign, ExternalLink } from 'lucide-react';
 
 const envelopeStyles = `
@@ -43,6 +43,41 @@ const envelopeStyles = `
   .letter-expand   { animation: letterExpand  0.7s  ease-in forwards; }
   .click-pulse     { animation: clickPulse 1.8s ease-in-out infinite; }
 `;
+
+const WEDDING_DATE = new Date(2027, 9, 23, 0, 0, 0); // October 23, 2027 (local time)
+
+function Countdown() {
+  const [now, setNow] = useState(() => Date.now());
+  useEffect(() => {
+    const id = setInterval(() => setNow(Date.now()), 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  const diff = WEDDING_DATE.getTime() - now;
+  if (diff <= 0) {
+    return <div className="text-xl font-bold text-gray-800">Today's the day!</div>;
+  }
+  const days = Math.floor(diff / 86400000);
+  const hours = Math.floor((diff % 86400000) / 3600000);
+  const minutes = Math.floor((diff % 3600000) / 60000);
+  const seconds = Math.floor((diff % 60000) / 1000);
+  const units = [
+    { label: 'Days', value: days },
+    { label: 'Hours', value: hours },
+    { label: 'Minutes', value: minutes },
+    { label: 'Seconds', value: seconds },
+  ];
+  return (
+    <div className="flex justify-center gap-3 md:gap-5">
+      {units.map(u => (
+        <div key={u.label} className="text-center min-w-[56px]">
+          <div className="text-2xl md:text-3xl font-bold text-purple-900">{String(u.value).padStart(2, '0')}</div>
+          <div className="text-xs md:text-sm uppercase tracking-wider text-gray-700">{u.label}</div>
+        </div>
+      ))}
+    </div>
+  );
+}
 
 function EnvelopeIntro({ alreadyUnlocked, setUnlocked, onComplete, autoAdvance = false }: {
   alreadyUnlocked: boolean;
@@ -592,6 +627,9 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
                       <MapPin className="text-purple-600" />
                       <span>The Gardenia, Valley View TX</span>
                     </div>
+                  </div>
+                  <div className="mt-4 pt-3 border-t border-gray-400/50">
+                    <Countdown />
                   </div>
                 </div>
                 <div className="mb-0"></div>
