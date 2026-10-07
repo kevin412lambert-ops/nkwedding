@@ -68,11 +68,11 @@ function Countdown() {
     { label: 'Seconds', value: seconds },
   ];
   return (
-    <div className="flex justify-center gap-3 md:gap-5">
+    <div className="flex justify-center gap-4 md:gap-8">
       {units.map(u => (
-        <div key={u.label} className="text-center min-w-[56px]">
-          <div className="text-2xl md:text-3xl font-bold text-purple-900">{String(u.value).padStart(2, '0')}</div>
-          <div className="text-xs md:text-sm uppercase tracking-wider text-gray-700">{u.label}</div>
+        <div key={u.label} className="text-center min-w-[64px] md:min-w-[110px]">
+          <div className="text-4xl md:text-7xl font-bold text-purple-900">{String(u.value).padStart(2, '0')}</div>
+          <div className="text-xs md:text-lg uppercase tracking-wider text-gray-800">{u.label}</div>
         </div>
       ))}
     </div>
@@ -591,6 +591,12 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
 
       <div className="pt-24">
         {activeSection === 'home' && (
+          <>
+          <div className="flex justify-center px-4 mb-6">
+            <div className="rounded-2xl px-8 py-5 md:px-12 md:py-6 shadow-lg" style={{background: 'rgba(200,200,200,0.45)', backdropFilter: 'blur(4px)'}}>
+              <Countdown />
+            </div>
+          </div>
           <div className="flex justify-center px-4">
             <div className="relative max-w-4xl w-full rounded-3xl shadow-2xl overflow-hidden border border-teal-100"
                  style={{
@@ -600,12 +606,7 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
                    minHeight: '805px'
                  }}>
               {/* "Nichole & Kevin" — top of photo, centered */}
-              <div className="pt-6 text-center">
-                <div className="inline-block rounded-2xl px-6 py-3" style={{background: 'rgba(200,200,200,0.45)', backdropFilter: 'blur(4px)'}}>
-                  <Countdown />
-                </div>
-              </div>
-              <div className="pt-4 text-center">
+              <div className="pt-10 text-center">
                 <h1 className="text-6xl md:text-8xl font-serif text-purple-900"
                     style={{textShadow: '0 2px 12px rgba(255,255,255,0.9)'}}>
                   Nichole & Kevin
@@ -666,6 +667,7 @@ const DISCORD_WEBHOOK_RSVP = 'https://discord.com/api/webhooks/14254420864671457
               </div>
             </div>
           </div>
+          </>
         )}
 
         {activeSection === 'story' && (
